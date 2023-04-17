@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  serverless:
+    build:
+      context: ./docker/serverless
+    environment:
+      - AWS_SHARED_CREDENTIALS_FILE=/home/serverless/config/aws/credentials
+    volumes:
+      - ./:/home/serverless
+    ports:
+      - "3000:3000"

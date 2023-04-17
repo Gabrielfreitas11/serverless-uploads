@@ -1,0 +1,16 @@
+service: serverless-lab
+
+functions:
+  productsByEAN:
+    handler: services/lab/controllers/productsByEAN/index.handle
+    environment:
+      client: account
+      service: productsByEAN
+    events:
+      - http:
+          path: productsByEAN
+          method: POST
+
+customDomain:
+  basePath: "lab-${self:provider.stage}"
+  stage: ${self:provider.stage}

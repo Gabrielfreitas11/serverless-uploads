@@ -1,0 +1,32 @@
+module.exports = {
+  env: {
+    'jest/globals': true,
+    commonjs: true,
+    es2020: true,
+    node: true,
+  },
+  plugins: ['jest'],
+  parser: 'babel-eslint',
+  extends: ['airbnb-base'],
+  parserOptions: {
+    ecmaVersion: 11,
+  },
+  rules: {
+    'no-console': 'off',
+    'prefer-promise-reject-errors': 'off',
+    'no-param-reassign': 'off',
+    'prefer-destructuring': 'off',
+    'max-len': 'off',
+    radix: 'off',
+    'global-require': 'off',
+    'import/no-dynamic-require': 'off',
+    'linebreak-style': 'off',
+    'no-unused-expressions': 'off',
+    'no-extend-native': 'off',
+    'no-throw-literal': 'off',
+    'no-plusplus': 'off',
+    'consistent-return': 'off',
+    'no-underscore-dangle': 'off',
+    'import/prefer-default-export': 'off',
+  },
+};

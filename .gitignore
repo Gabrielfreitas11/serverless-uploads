@@ -1,0 +1,11 @@
+.vscode
+node_modules
+package-lock.json
+
+config/env.local.yml
+config/env.dev.yml
+config/env.prod.yml
+config/aws/*
+
+# Serverless directories
+.serverless

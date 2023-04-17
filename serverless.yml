@@ -1,0 +1,36 @@
+service: ${file(${opt:config-file}):service}
+
+provider:
+  name: aws
+  endpointType: REGIONAL
+  stage: ${opt:stage, 'local'}
+  runtime: nodejs14.x
+  region: sa-east-1
+  versionFunctions: false
+  # profile: default
+  deploymentBucket:
+    name: viplist-app-serverless
+  memorySize: 128
+  timeout: 30
+  environment: ${file(./config/env.${opt:stage}.yml)}
+
+package:
+  exclude:
+    - "lib/phantomjs/phantomjs-linux"
+    - "lib/phantomjs/phantomjs-mac"
+
+functions: ${file(${opt:config-file}):functions}
+
+custom:
+  customDomain: ${file(${opt:config-file}):customDomain}
+  webpack:
+    webpackConfig: webpack.config.js
+    includeModules: true
+    packager: 'npm'
+  serverless-offline:
+    host: 0.0.0.0
+    port: 3000
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
