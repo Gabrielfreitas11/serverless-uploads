@@ -14,10 +14,9 @@ on:
         type: choice
         description: "environment"
         options:
-          - wpp-bot
-          - account
+          - lab
         required: true
-        default: wpp-bot
+        default: lab
 jobs:
   # Label of the container job
   container-job:
