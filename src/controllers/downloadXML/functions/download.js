@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const { mssql } = require('../../../../common/mssql');
+const mssql  = require('../../../../common/mssql');
 
 const { getCert } = require('./getCert');
 

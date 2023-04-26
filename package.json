@@ -1,8 +1,11 @@
 {
-  "name": "node",
-  "version": "14.21.1",
+  "name": "lab-itworks",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
     "start": "sls offline start -s local"
   },

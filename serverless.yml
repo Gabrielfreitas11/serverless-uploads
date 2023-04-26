@@ -15,13 +15,13 @@ provider:
   environment: ${file(./config/env.${opt:stage}.yml)}
 
 package:
-  exclude:
+  patterns:
     - "lib/phantomjs/phantomjs-linux"
     - "lib/phantomjs/phantomjs-mac"
 
 functions:
   base64ToFile:
-    handler: src/controllers/base64ToFile/index.handle
+    handler: src/routes.base64ToFile
     environment:
       client: lab
       service: base64ToFile
@@ -31,7 +31,7 @@ functions:
           method: POST
 
   downloadXML:
-    handler: src/controllers/downloadXML/index.handle
+    handler: src/routes.downloadXML
     environment:
       client: lab
       service: downloadXML

@@ -1,9 +1,9 @@
-const HttpResponse = require('../../../common/httpResponse');
+const HttpResponse = require("../../../common/httpResponse");
 
-const { isValidParams } = require('./validations/validator');
+const { isValidParams } = require("./validations/validator");
 
-const { download } = require('./functions/download');
-const { sendFileToPath } = require('./functions/sendFileToPath');
+const { download } = require("./functions/download");
+const { sendFileToPath } = require("./functions/sendFileToPath");
 
 module.exports = async ({ body }) => {
   try {
@@ -19,7 +19,7 @@ module.exports = async ({ body }) => {
 
     if (!fileBuffer) {
       return HttpResponse.badRequest({
-        message: 'Problemas ao gerar arquivo',
+        message: "Problemas ao gerar arquivo",
       });
     }
 
@@ -30,7 +30,7 @@ module.exports = async ({ body }) => {
     console.log(error);
     return HttpResponse.serverError({
       error: error?.message,
-      message: 'Ocorreu um erro ao gerar o arquivo',
+      message: "Ocorreu um erro ao gerar o arquivo",
     });
   }
 };

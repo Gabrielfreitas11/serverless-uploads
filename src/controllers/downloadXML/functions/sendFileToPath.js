@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const FormData = require('form-data');
 
-const { mssql } = require('../../../../common/mssql');
+const  mssql  = require('../../../../common/mssql');
 
 exports.sendFileToPath = async (fileBuffer, key) => {
   try {

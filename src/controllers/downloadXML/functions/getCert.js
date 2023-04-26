@@ -1,9 +1,9 @@
-const { CookieJar } = require('tough-cookie');
+const { CookieJar } = require("tough-cookie");
 
-const { HttpsCookieAgent, HttpCookieAgent } = require('http-cookie-agent/http');
-const { decrypt } = require('../../../../common/cryptography');
+const { HttpsCookieAgent, HttpCookieAgent } = require("http-cookie-agent/http");
+const { decrypt } = require("../../../../common/cryptography");
 
-const { mssql } = require('../../../../common/mssql');
+const mssql = require("../../../../common/mssql");
 
 exports.getCert = async (cnpj, key) => {
   const certDB = await mssql.getCert(cnpj);
@@ -11,8 +11,8 @@ exports.getCert = async (cnpj, key) => {
   if (!certDB || certDB?.length === 0) {
     mssql.update(4, key);
     throw new Error(
-      'Não foi localizado nunenhum certificado com esse cnpj: ',
-      cnpj,
+      "Não foi localizado nunenhum certificado com esse cnpj: ",
+      cnpj
     );
   }
 
