@@ -1,11 +1,11 @@
-import { CookieJar } from 'tough-cookie';
+const { CookieJar } = require('tough-cookie');
 
-import { HttpsCookieAgent, HttpCookieAgent } from 'http-cookie-agent/http';
-import { decrypt } from '../../../../common/cryptography';
+const { HttpsCookieAgent, HttpCookieAgent } = require('http-cookie-agent/http');
+const { decrypt } = require('../../../../common/cryptography');
 
-import { mssql } from '../../../../common/mssql';
+const { mssql } = require('../../../../common/mssql');
 
-export async function getCert(cnpj, key) {
+exports.getCert = async (cnpj, key) => {
   const certDB = await mssql.getCert(cnpj);
 
   if (!certDB || certDB?.length === 0) {
@@ -31,4 +31,4 @@ export async function getCert(cnpj, key) {
   });
 
   return { httpsAgent, httpAgent };
-}
+};

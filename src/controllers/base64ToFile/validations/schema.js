@@ -1,6 +1,6 @@
-import Joi from '@hapi/joi';
+const Joi = require('@hapi/joi');
 
-export const schema = Joi.object({
+exports.schema = Joi.object({
   base64: Joi.string().required(),
   fileName: Joi.string().required(),
   client: Joi.string().required(),

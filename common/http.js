@@ -1,6 +1,6 @@
-import axios from 'axios';
+const axios = require('axios');
 
-export async function request(options, optionsHttpsAgent = null) {
+exports.request = async (options, optionsHttpsAgent = null) => {
   const optionsAxios = optionsHttpsAgent && optionsHttpsAgent.httpsAgent
     ? optionsHttpsAgent
     : options;
@@ -11,4 +11,4 @@ export async function request(options, optionsHttpsAgent = null) {
       throw error;
     },
   );
-}
+};

@@ -7,7 +7,7 @@ provider:
   runtime: nodejs14.x
   region: sa-east-1
   versionFunctions: false
-  # profile: default
+  profile: default
   deploymentBucket:
     name: it-works-lab-serverless
   memorySize: 128
@@ -16,7 +16,6 @@ provider:
 
 package:
   exclude:
-    - node_modules/puppeteer/.local-chromium/**
     - "lib/phantomjs/phantomjs-linux"
     - "lib/phantomjs/phantomjs-mac"
 
@@ -45,14 +44,9 @@ custom:
   customDomain:
     basePath: "lab-${self:provider.stage}"
     stage: ${self:provider.stage}
-  webpack:
-    webpackConfig: webpack.config.js
-    includeModules: true
-    packager: "npm"
   serverless-offline:
     host: 0.0.0.0
     port: 3000
 
 plugins:
   - serverless-offline
-  - serverless-webpack

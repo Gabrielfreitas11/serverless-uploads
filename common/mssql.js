@@ -1,4 +1,4 @@
-import sql from 'mssql';
+const sql = require('mssql');
 
 const connectDB = async () => {
   const sqlConfig = {
@@ -21,7 +21,7 @@ const connectDB = async () => {
   return sql.connect(sqlConfig);
 };
 
-export const mssql = {
+module.exports = {
   get: async (status) => {
     try {
       await connectDB();

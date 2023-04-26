@@ -1,4 +1,4 @@
-export default class HttpResponse {
+module.exports = class HttpResponse {
   static ok(body) {
     return {
       statusCode: 200,
@@ -33,4 +33,4 @@ export default class HttpResponse {
       body,
     };
   }
-}
+};

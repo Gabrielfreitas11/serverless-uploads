@@ -1,8 +1,8 @@
-import axios from 'axios';
+const axios = require('axios');
 
-import { mssql } from '../../../../common/mssql';
+const { mssql } = require('../../../../common/mssql');
 
-import { getCert } from './getCert';
+const { getCert } = require('./getCert');
 
 const addMissingParameterInUrl = (url) => {
   if (!url.includes('&lp=')) {
@@ -13,7 +13,7 @@ const addMissingParameterInUrl = (url) => {
   return url;
 };
 
-export async function download({ url, key, cnpj }) {
+exports.download = async ({ url, key, cnpj }) => {
   const { httpsAgent, httpAgent } = await getCert(cnpj, key);
 
   const instance = axios.create({
@@ -46,4 +46,4 @@ export async function download({ url, key, cnpj }) {
     mssql.update(5, key);
     console.log(error);
   }
-}
+};

@@ -1,6 +1,6 @@
-import { schema } from './schema';
+const { schema } = require('./schema');
 
-export function isValidParams(params) {
+exports.isValidParams = (params) => {
   if (!params) {
     return {
       error: true,
@@ -20,4 +20,4 @@ export function isValidParams(params) {
     value: result.value,
     error: false,
   };
-}
+};

@@ -1,14 +1,11 @@
-import HttpResponse from '../../../common/httpResponse';
+const HttpResponse = require('../../../common/httpResponse');
 
-import { isValidParams } from './validations/validator';
+const { isValidParams } = require('./validations/validator');
 
-import handleFunction from '../../../common/handler/handle';
+const { download } = require('./functions/download');
+const { sendFileToPath } = require('./functions/sendFileToPath');
 
-import { download } from './functions/download';
-
-import { sendFileToPath } from './functions/sendFileToPath';
-
-export const downloadXML = async ({ body }) => {
+module.exports = async ({ body }) => {
   try {
     const params = isValidParams(JSON.parse(body));
 
@@ -37,5 +34,3 @@ export const downloadXML = async ({ body }) => {
     });
   }
 };
-
-export const handle = async (event, context) => handleFunction(event, context, downloadXML, 'downloadXML');

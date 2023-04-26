@@ -1,10 +1,10 @@
-import axios from 'axios';
+const axios = require('axios');
 
-import FormData from 'form-data';
+const FormData = require('form-data');
 
-import { mssql } from '../../../../common/mssql';
+const { mssql } = require('../../../../common/mssql');
 
-export async function sendFileToPath(fileBuffer, key) {
+exports.sendFileToPath = async (fileBuffer, key) => {
   try {
     const formData = new FormData();
 
@@ -37,4 +37,4 @@ export async function sendFileToPath(fileBuffer, key) {
     mssql.update(1, key);
     throw new Error(error?.message);
   }
-}
+};

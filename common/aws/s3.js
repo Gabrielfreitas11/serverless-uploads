@@ -1,4 +1,4 @@
-import aws from 'aws-sdk';
+const aws = require('aws-sdk');
 
 const methods = {
   async getContentFile(bucketName, keyName) {
@@ -60,4 +60,4 @@ const s3 = () => {
   return methods;
 };
 
-export default s3;
+module.exports = s3;

@@ -1,12 +1,10 @@
-import HttpResponse from '../../../common/httpResponse';
+const HttpResponse = require('../../../common/httpResponse');
 
-import { isValidParams } from './validations/validator';
+const { isValidParams } = require('./validations/validator');
 
-import handleFunction from '../../../common/handler/handle';
+const { uploadFile } = require('./functions/uploadFile');
 
-import { uploadFile } from './functions/uploadFile';
-
-export const base64ToFile = async ({ body }) => {
+module.exports = async ({ body }) => {
   try {
     const params = isValidParams(JSON.parse(body));
 
@@ -29,5 +27,3 @@ export const base64ToFile = async ({ body }) => {
     });
   }
 };
-
-export const handle = async (event, context) => handleFunction(event, context, base64ToFile, 'base64ToFile');

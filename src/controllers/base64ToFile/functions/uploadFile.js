@@ -1,10 +1,15 @@
-import S3 from '../../../../common/aws/s3';
+const S3 = require('../../../../common/aws/s3');
 
 const s3Access = S3();
 
-export async function uploadFile({
-  fileName, client, ano, mes, base64, fileType,
-}) {
+exports.uploadFile = async ({
+  fileName,
+  client,
+  ano,
+  mes,
+  base64,
+  fileType,
+}) => {
   const params = {
     bucket: 'emalote',
     caption: `${client}/${ano}/${mes}/${fileName}.${fileType}`,
@@ -16,4 +21,4 @@ export async function uploadFile({
   const upload = await s3Access.sendFile(params);
 
   return upload && upload.Location ? upload.Location : '';
-}
+};
