@@ -14,7 +14,6 @@ provider:
   timeout: 30
   environment: ${file(./config/env.${opt:stage}.yml)}
 
-	
 package:
   exclude:
     - node_modules/puppeteer/.local-chromium/**
@@ -22,16 +21,6 @@ package:
     - "lib/phantomjs/phantomjs-mac"
 
 functions:
-  productsByEAN:
-    handler: src/controllers/productsByEAN/index.handle
-    environment:
-      client: lab
-      service: productsByEAN
-    events:
-      - http:
-          path: productsByEAN
-          method: POST
-
   base64ToFile:
     handler: src/controllers/base64ToFile/index.handle
     environment:

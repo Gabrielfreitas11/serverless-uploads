@@ -5,10 +5,11 @@ import { decrypt } from '../../../../common/cryptography';
 
 import { mssql } from '../../../../common/mssql';
 
-export async function getCert(cnpj) {
+export async function getCert(cnpj, key) {
   const certDB = await mssql.getCert(cnpj);
 
   if (!certDB || certDB?.length === 0) {
+    mssql.update(4, key);
     throw new Error(
       'Não foi localizado nunenhum certificado com esse cnpj: ',
       cnpj,

@@ -14,7 +14,7 @@ const addMissingParameterInUrl = (url) => {
 };
 
 export async function download({ url, key, cnpj }) {
-  const { httpsAgent, httpAgent } = await getCert(cnpj);
+  const { httpsAgent, httpAgent } = await getCert(cnpj, key);
 
   const instance = axios.create({
     httpsAgent,
@@ -36,7 +36,6 @@ export async function download({ url, key, cnpj }) {
     }
 
     if (xml.data?.includes('html')) {
-      mssql.update(1, key);
       throw new Error('Não foi possível gerar o XML');
     }
 
@@ -44,6 +43,7 @@ export async function download({ url, key, cnpj }) {
 
     return buffer;
   } catch (error) {
+    mssql.update(5, key);
     console.log(error);
   }
 }
