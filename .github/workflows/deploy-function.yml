@@ -54,4 +54,4 @@ jobs:
         run: npm install
 
       - name: Run deploy
-        run: sls deploy -s ${{ github.event.inputs.ambiente }} -f ${{ github.event.inputs.function }} --config-file services/${{ github.event.inputs.service }}/config.yml
+        run: sls deploy -s ${{ github.event.inputs.ambiente }} -f ${{ github.event.inputs.function }}

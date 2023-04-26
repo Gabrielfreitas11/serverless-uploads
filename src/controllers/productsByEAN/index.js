@@ -1,6 +1,6 @@
-import HttpResponse from '../../../../common/httpResponse';
+import HttpResponse from '../../../common/httpResponse';
 
-import handleFunction from '../../../../common/handler/handle';
+import handleFunction from '../../../common/handler/handle';
 
 import { isValidParams } from './validations/validator';
 
@@ -8,6 +8,7 @@ import { getMessage } from './functions/getMessage';
 
 export const productsByEAN = async ({ body }) => {
   try {
+    console.log(body);
     const params = isValidParams(JSON.parse(body));
 
     if (params.error) {
@@ -16,10 +17,10 @@ export const productsByEAN = async ({ body }) => {
       });
     }
 
-    const product = await getMessage(params.value);
+    const message = await getMessage(params.value);
 
     return HttpResponse.ok({
-      product,
+      message,
     });
   } catch (error) {
     // console.log(error);

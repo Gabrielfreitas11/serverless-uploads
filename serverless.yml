@@ -1,4 +1,4 @@
-service: ${file(${opt:config-file}):service}
+service: serverless-lab
 
 provider:
   name: aws
@@ -9,24 +9,57 @@ provider:
   versionFunctions: false
   # profile: default
   deploymentBucket:
-    name: viplist-app-serverless
+    name: it-works-lab-serverless
   memorySize: 128
   timeout: 30
   environment: ${file(./config/env.${opt:stage}.yml)}
 
+	
 package:
   exclude:
+    - node_modules/puppeteer/.local-chromium/**
     - "lib/phantomjs/phantomjs-linux"
     - "lib/phantomjs/phantomjs-mac"
 
-functions: ${file(${opt:config-file}):functions}
+functions:
+  productsByEAN:
+    handler: src/controllers/productsByEAN/index.handle
+    environment:
+      client: lab
+      service: productsByEAN
+    events:
+      - http:
+          path: productsByEAN
+          method: POST
+
+  base64ToFile:
+    handler: src/controllers/base64ToFile/index.handle
+    environment:
+      client: lab
+      service: base64ToFile
+    events:
+      - http:
+          path: base64ToFile
+          method: POST
+
+  downloadXML:
+    handler: src/controllers/downloadXML/index.handle
+    environment:
+      client: lab
+      service: downloadXML
+    events:
+      - http:
+          path: downloadXML
+          method: POST
 
 custom:
-  customDomain: ${file(${opt:config-file}):customDomain}
+  customDomain:
+    basePath: "lab-${self:provider.stage}"
+    stage: ${self:provider.stage}
   webpack:
     webpackConfig: webpack.config.js
     includeModules: true
-    packager: 'npm'
+    packager: "npm"
   serverless-offline:
     host: 0.0.0.0
     port: 3000
