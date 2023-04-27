@@ -7,7 +7,7 @@ provider:
   runtime: nodejs14.x
   region: sa-east-1
   versionFunctions: false
-  profile: default
+  # profile: default
   deploymentBucket:
     name: it-works-lab-serverless
   memorySize: 128
