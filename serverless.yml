@@ -60,8 +60,6 @@ functions:
       - http:
           path: uploadKeysNFe
           method: POST
-      - cloudwatchLog: '/aws/lambda/hello'
-          enabled: false
 
 
 custom:
