@@ -1,4 +1,4 @@
-const sql = require('mssql');
+const sql = require("mssql");
 
 const connectDB = async () => {
   const sqlConfig = {
@@ -22,24 +22,12 @@ const connectDB = async () => {
 };
 
 module.exports = {
-  get: async (status) => {
-    try {
-      await connectDB();
-
-      const result = await sql.query`select top 5 * from IGXMLDownload where Status = ${status}`;
-
-      return result?.recordsets?.flat() || [];
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
-  },
-
   getCert: async (cnpj) => {
     try {
       await connectDB();
 
-      const result = await sql.query`select top 1 Senha, RawData from IGCertificadoDigital where CNPJ_Contribuinte = ${cnpj}`;
+      const result =
+        await sql.query`select top 1 Senha, RawData from IGCertificadoDigital where CNPJ_Contribuinte = ${cnpj}`;
 
       return result?.recordsets?.flat() || [];
     } catch (error) {
@@ -52,9 +40,11 @@ module.exports = {
     try {
       await connectDB();
 
-      const result = await sql.query`update IGXMLDownload set Status = ${status} where ChaveAcessoDOC = ${nfe}`;
+      if (status == 1) {
+        return sql.query`update IGXMLDownload set Status = ${status}, attempts = attempts + 1 where ChaveAcessoDOC = ${nfe}`;
+      }
 
-      return result;
+      return sql.query`update IGXMLDownload set Status = ${status} where ChaveAcessoDOC = ${nfe}`;
     } catch (error) {
       console.log(error);
       return null;
