@@ -29,9 +29,6 @@ const AutoHandler = (controllersPath, ...middlewares) => {
         return middleware(promise, service, event, context, BaseHandler);
       }, requestPromise);
 
-
-      console.log(lastPromise)
-
       return lastPromise;
     };
   });
