@@ -19,27 +19,19 @@ const formatResults = (results) => {
   return formatResults;
 };
 
-exports.getKeysFromBase64 = async (base64) => {
+exports.getKeysFromBase64 = async (file) => {
   try {
-    const buffer = Buffer.from(base64, "base64");
+    const splitContent = file.split(" ");
 
-    const stream = Readable.from(buffer.toString());
-    let results = [];
+    const content = splitContent[splitContent.length - 1]
+      .replace(/-|text\/csv/g, "")
+      .trim();
 
-    await new Promise((resolve, reject) => {
-      stream
-        .pipe(csv())
-        .on("data", (data) => {
-          results.push(data);
-        })
-        .on("finish", () => {
-          results = formatResults(results);
+    const keys = content.replace(/\r/g, "").split("\n");
 
-          resolve();
-        });
-    });
+    keys.pop();
 
-    return results;
+    return keys;
   } catch (error) {
     console.log(error);
     return null;

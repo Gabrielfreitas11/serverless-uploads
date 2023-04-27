@@ -6,9 +6,14 @@ const { getKeysFromBase64 } = require("./functions/getKeysFromBase64");
 
 const { sendKeysToBase } = require("./functions/sendKeysToBase");
 
-module.exports = async ({ body }) => {
+module.exports = async ({ body, headers }) => {
   try {
-    const params = isValidParams(JSON.parse(body));
+    console.log(headers);
+    const params = isValidParams({
+      ...JSON.parse(body),
+      cnpj: headers?.cnpj,
+      type: headers?.type,
+    });
 
     if (params.error) {
       return HttpResponse.badRequest({
@@ -16,10 +21,10 @@ module.exports = async ({ body }) => {
       });
     }
 
-    let { type, keys, file, cnpj } = params.value;
+    let { type, keys, formData, cnpj, boundary } = params.value;
 
     if (type == "file") {
-      keys = await getKeysFromBase64(file);
+      keys = await getKeysFromBase64(formData, boundary);
 
       if (!keys) {
         return HttpResponse.badRequest({

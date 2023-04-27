@@ -21,6 +21,12 @@ class BaseHandler {
     }
 
     try {
+      if (event.headers["Content-Type"].includes("form-data")) {
+        event.body = JSON.stringify({
+          formData: event.body,
+        });
+      }
+
       this.generateLog({
         payload: {
           body:
@@ -95,6 +101,7 @@ class BaseHandler {
   }
 
   // eslint-disable-next-line class-methods-use-this
+
   generateLog(response) {
     console.log(response);
   }
