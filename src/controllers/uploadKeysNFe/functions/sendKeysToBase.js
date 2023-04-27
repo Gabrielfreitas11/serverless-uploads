@@ -5,9 +5,13 @@ const formatPayloadToDBValues = (keys, cnpj) => {
 };
 
 exports.sendKeysToBase = async (keys, cnpj) => {
-  const data = formatPayloadToDBValues(keys, cnpj);
+  try {
+    const data = formatPayloadToDBValues(keys, cnpj);
 
-  const result = await mssql.insert(data);
+    const result = await mssql.insert(data);
 
-  return result;
+    return result;
+  } catch (error) {
+    throw new Error(error?.message);
+  }
 };

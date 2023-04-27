@@ -42,7 +42,7 @@ module.exports = async ({ body }) => {
     console.log(error);
     return HttpResponse.serverError({
       error: error?.message,
-      message: "Ocorreu um erro ao gerar o arquivo",
+      message: "Ocorreu um erro ao realizar o upload das chaves",
     });
   }
 };

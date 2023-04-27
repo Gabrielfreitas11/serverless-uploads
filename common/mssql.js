@@ -50,8 +50,7 @@ module.exports = {
 
       return result?.recordsets?.flat() || [];
     } catch (error) {
-      console.log(error);
-      return null;
+      throw new Error(error?.message);
     }
   },
 
