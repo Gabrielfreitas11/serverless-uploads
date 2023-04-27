@@ -22,7 +22,7 @@ const connectDB = async () => {
 };
 
 module.exports = {
-  getCert: async (cnpj) => {
+  async getCert(cnpj) {
     try {
       await connectDB();
 
@@ -36,7 +36,26 @@ module.exports = {
     }
   },
 
-  update: async (status, nfe) => {
+  async insert(data) {
+    try {
+      await connectDB();
+
+      const request = new sql.Request();
+
+      const query =
+        "INSERT INTO IGXMLDownload (CNPJ_Contribuinte, ChaveAcessoDOC, Status) VALUES " +
+        data;
+
+      const result = await request.query(query);
+
+      return result?.recordsets?.flat() || [];
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  },
+
+  async update(status, nfe) {
     try {
       await connectDB();
 

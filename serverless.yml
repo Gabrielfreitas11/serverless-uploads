@@ -2,6 +2,7 @@ service: serverless-lab
 
 provider:
   name: aws
+  logs: false
   endpointType: REGIONAL
   stage: ${opt:stage, 'local'}
   runtime: nodejs14.x
@@ -38,6 +39,26 @@ functions:
     events:
       - http:
           path: downloadXML
+          method: POST
+
+  getFiles:
+    handler: src/routes.getFiles
+    environment:
+      client: lab
+      service: getFiles
+    events:
+      - http:
+          path: getFiles
+          method: POST
+
+  uploadKeysNFe:
+    handler: src/routes.uploadKeysNFe
+    environment:
+      client: lab
+      service: uploadKeysNFe
+    events:
+      - http:
+          path: uploadKeysNFe
           method: POST
 
 custom:

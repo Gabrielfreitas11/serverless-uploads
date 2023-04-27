@@ -1,4 +1,4 @@
-const aws = require('aws-sdk');
+const aws = require("aws-sdk");
 
 const methods = {
   async getContentFile(bucketName, keyName) {
@@ -12,7 +12,7 @@ const methods = {
     return s3sdk.getObject(params).promise();
   },
 
-  async sendFile(fileDetails, expires, acl = 'public-read') {
+  async sendFile(fileDetails, expires, acl = "public-read") {
     const params = {
       Bucket: fileDetails.bucket,
       Key: fileDetails.caption,
@@ -31,13 +31,23 @@ const methods = {
     return s3sdk.upload(params).promise();
   },
 
+  async filterFiles(fileDetails) {
+    const s3sdk = new aws.S3();
+
+    const params = {
+      Bucket: fileDetails.bucket,
+      Tagging: fileDetails.tag,
+    };
+
+    return s3sdk.getObjects(params).promise();
+  },
+
   async listFiles(fileDetails) {
     const s3sdk = new aws.S3();
 
     const params = {
       Bucket: fileDetails.bucket,
       Prefix: fileDetails.key,
-
     };
 
     return s3sdk.listObjectsV2(params).promise();

@@ -1,8 +1,8 @@
-const HttpResponse = require('../../../common/httpResponse');
+const HttpResponse = require("../../../common/httpResponse");
 
-const { isValidParams } = require('./validations/validator');
+const { isValidParams } = require("./validations/validator");
 
-const { uploadFile } = require('./functions/uploadFile');
+const { filterFilesByTag } = require("./functions/filterFilesByTag");
 
 module.exports = async ({ body }) => {
   try {
@@ -14,7 +14,7 @@ module.exports = async ({ body }) => {
       });
     }
 
-    const file = await uploadFile(params.value);
+    const file = await filterFilesByTag(params.value);
 
     return HttpResponse.ok({
       file,
@@ -23,7 +23,7 @@ module.exports = async ({ body }) => {
     // console.log(error);
 
     return HttpResponse.serverError({
-      message: error?.message || 'Problemas ao gerar arquivo',
+      message: error?.message || "Problemas ao gerar arquivo",
     });
   }
 };

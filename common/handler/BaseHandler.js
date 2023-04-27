@@ -15,8 +15,8 @@ class BaseHandler {
         401,
         JSON.stringify({
           statusCode: 401,
-          message: 'Unauthorized!',
-        }),
+          message: "Unauthorized!",
+        })
       );
     }
 
@@ -24,7 +24,7 @@ class BaseHandler {
       this.generateLog({
         payload: {
           body:
-            typeof event.body === 'string'
+            typeof event.body === "string"
               ? JSON.parse(event.body)
               : event.body,
           queryStringParameters: event.queryStringParameters,
@@ -37,8 +37,8 @@ class BaseHandler {
 
       const returnFunction = BaseHandler.httpResponse(
         response.statusCode,
-        typeof response === 'string' ? response : JSON.stringify(response),
-        response.headers,
+        typeof response === "string" ? response : JSON.stringify(response),
+        response.headers
       );
 
       if (response.statusCode !== 200) {
@@ -47,9 +47,10 @@ class BaseHandler {
 
       return returnFunction;
     } catch (err) {
-      const message = err.response && err.response.data
-        ? err.response.data
-        : err.message || err;
+      const message =
+        err.response && err.response.data
+          ? err.response.data
+          : err.message || err;
 
       const returnFunction = BaseHandler.httpResponse(500, message);
 
@@ -62,11 +63,12 @@ class BaseHandler {
   setFunctionContext(event, context) {
     this.event = event;
     this.context = context;
-    process.env.sourceIpAddress = event.requestContext
-      && event.requestContext.identity
-      && event.requestContext.identity.sourceIp
-      ? event.requestContext.identity.sourceIp
-      : null;
+    process.env.sourceIpAddress =
+      event.requestContext &&
+      event.requestContext.identity &&
+      event.requestContext.identity.sourceIp
+        ? event.requestContext.identity.sourceIp
+        : null;
   }
 
   static httpResponse(statusCode, body, headers = {}) {
@@ -74,8 +76,8 @@ class BaseHandler {
       statusCode,
       body,
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': '*',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
         ...headers,
       },
     };
@@ -103,8 +105,8 @@ class BaseHandler {
     }
 
     return (
-      this.event.headers.Authorization === this.env.authToken
-      || this.event.headers.authorization === this.env.authToken
+      this.event.headers.Authorization === this.env.authToken ||
+      this.event.headers.authorization === this.env.authToken
     );
   }
 }
