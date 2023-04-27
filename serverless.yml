@@ -60,7 +60,10 @@ functions:
       - http:
           path: uploadKeysNFe
           method: POST
-
+          cors:
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
 
 custom:
   customDomain:
