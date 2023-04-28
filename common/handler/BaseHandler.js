@@ -82,8 +82,8 @@ class BaseHandler {
       statusCode,
       body,
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Origin": "http://localhost:4200/",
+        "Access-Control-Allow-Headers": "http://localhost:4200/",
         ...headers,
       },
     };

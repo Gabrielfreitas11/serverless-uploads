@@ -61,16 +61,9 @@ functions:
           path: uploadKeysNFe
           method: POST
           cors:
-            origins:
-              - "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - cnpj
-              - type
-            allowCredentials: false
+            allowedOrigins: "http://localhost:4200/"
+            allowedHeaders: "http://localhost:4200/"
+            allowedMethods: "http://localhost:4200/"
 
 custom:
   customDomain:
