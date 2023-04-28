@@ -42,9 +42,17 @@ module.exports = {
 
       const request = new sql.Request();
 
-      const query =
-        "INSERT INTO IGXMLDownload (CNPJ_Contribuinte, ChaveAcessoDOC, Status) VALUES " +
-        data;
+      const query = `MERGE INTO IGXMLDownload AS doc
+        USING (
+            VALUES 
+                ${data}
+        ) AS source (CNPJ_Contribuinte, ChaveAcessoDOC, Status)
+        ON (doc.ChaveAcessoDOC = source.ChaveAcessoDOC)
+        WHEN MATCHED THEN 
+            UPDATE SET doc.ChaveAcessoDOC = source.ChaveAcessoDOC
+        WHEN NOT MATCHED THEN 
+            INSERT (CNPJ_Contribuinte, ChaveAcessoDOC, Status)
+            VALUES (source.CNPJ_Contribuinte, source.ChaveAcessoDOC, source.Status);`;
 
       const result = await request.query(query);
 

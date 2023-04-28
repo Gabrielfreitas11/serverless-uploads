@@ -8,7 +8,7 @@ exports.getKeysFromBase64 = async (file) => {
 
     const keys = content.replace(/\r/g, "").split("\n");
 
-    const validKeys = keys.filter((x) => x.length == 44);
+    const validKeys = keys.filter((x) => x.replace(/[^0-9]/g, "").length == 44);
 
     return validKeys;
   } catch (error) {
