@@ -8,6 +8,10 @@ const { sendKeysToBase } = require("./functions/sendKeysToBase");
 
 module.exports = async ({ body, headers }) => {
   try {
+
+
+    console.log(headers)
+    
     const params = isValidParams({
       ...JSON.parse(body),
       cnpj: headers?.cnpj,
