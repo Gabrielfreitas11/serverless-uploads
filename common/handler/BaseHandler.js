@@ -21,7 +21,7 @@ class BaseHandler {
     }
 
     try {
-      if (event.headers["Content-Type"].includes("form-data")) {
+      if (event?.headers["Content-Type"]?.includes("form-data")) {
         event.body = JSON.stringify({
           formData: event.body,
         });
