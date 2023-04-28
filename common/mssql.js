@@ -46,7 +46,7 @@ module.exports = {
         USING (
             VALUES 
                 ${data}
-        ) AS source (CNPJ_Contribuinte, ChaveAcessoDOC, Status)
+        ) AS source (CNPJ_Contribuinte, ChaveAcessoDOC, Status, tipo)
         ON (doc.ChaveAcessoDOC = source.ChaveAcessoDOC)
         WHEN MATCHED THEN 
             UPDATE SET doc.ChaveAcessoDOC = source.ChaveAcessoDOC

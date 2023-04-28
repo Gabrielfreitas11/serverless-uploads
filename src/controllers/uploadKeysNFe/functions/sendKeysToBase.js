@@ -1,7 +1,15 @@
 const mssql = require("../../../../common/mssql");
 
 const formatPayloadToDBValues = (keys, cnpj) => {
-  return keys.map((key) => `('${cnpj}', '${key}', '1')`).join(", ");
+  return keys
+    .map((key) => {
+      const codigoModelo = key.substr(20, 2);
+
+      const type = codigoModelo == 55 ? "nfe" : "cte";
+
+      return `('${cnpj}', '${key}', '1', '${type}')`;
+    })
+    .join(", ");
 };
 
 exports.sendKeysToBase = async (keys, cnpj) => {
