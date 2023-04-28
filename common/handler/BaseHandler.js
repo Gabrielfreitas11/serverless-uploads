@@ -186,7 +186,7 @@ class BaseHandler {
       headers: {
         "Access-Control-Allow-Origin": "http://localhost:4200",
         "Access-Control-Allow-Headers":
-          "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, Cnpj, Type",
+          "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type",
         ...headers,
       },
     };

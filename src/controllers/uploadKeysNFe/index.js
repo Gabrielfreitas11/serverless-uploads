@@ -10,8 +10,8 @@ module.exports = async ({ body, headers }) => {
   try {
     const params = isValidParams({
       ...JSON.parse(body),
-      cnpj: headers?.Cnpj,
-      type: headers?.Type,
+      cnpj: headers?.cnpj,
+      type: headers?.type,
     });
 
     if (params.error) {

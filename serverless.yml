@@ -62,7 +62,7 @@ functions:
           method: POST
           cors:
             allowedOrigins: "http://localhost:4200"
-            allowedHeaders: "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, Cnpj, Type"
+            allowedHeaders: "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type"
             allowedMethods: "*"
 
 custom:
