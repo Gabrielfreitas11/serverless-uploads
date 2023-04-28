@@ -61,7 +61,7 @@ functions:
           path: uploadKeysNFe
           method: POST
           cors:
-            allowedOrigins: "http://localhost:4200"
+            allowedOrigins: "http://localhost:4200, https://app.impostograma.com.br"
             allowedHeaders: "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type"
             allowedMethods: "*"
 
