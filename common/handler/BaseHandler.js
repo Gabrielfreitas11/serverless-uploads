@@ -21,6 +21,7 @@ class BaseHandler {
     }
 
     try {
+      console.log(event)
       if (event?.headers["Content-Type"]?.includes("form-data")) {
         event.body = JSON.stringify({
           formData: event.body,
