@@ -72,6 +72,17 @@ custom:
   serverless-offline:
     host: 0.0.0.0
     port: 3000
+  cors:
+    origins:
+      - '*'
+    headers:
+      - Content-Type
+      - X-Amz-Date
+      - Authorization
+      - X-Api-Key
+      - cnpj
+      - type
+    allowCredentials: false
 
 plugins:
   - serverless-offline
