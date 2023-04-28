@@ -61,8 +61,8 @@ functions:
           path: uploadKeysNFe
           method: POST
           cors:
-            allowedOrigins: "*"
-            allowedHeaders: "*"
+            allowedOrigins: "http://localhost:4200"
+            allowedHeaders: "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type"
             allowedMethods: "*"
 
 custom:
