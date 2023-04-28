@@ -21,7 +21,7 @@ class BaseHandler {
     }
 
     try {
-      console.log(event)
+      console.log(event);
       if (event?.headers["Content-Type"]?.includes("form-data")) {
         event.body = JSON.stringify({
           formData: event.body,
@@ -83,8 +83,8 @@ class BaseHandler {
       statusCode,
       body,
       headers: {
-        "Access-Control-Allow-Origin": "http://localhost:4200/",
-        "Access-Control-Allow-Headers": "http://localhost:4200/",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
         ...headers,
       },
     };

@@ -61,9 +61,9 @@ functions:
           path: uploadKeysNFe
           method: POST
           cors:
-            allowedOrigins: "http://localhost:4200/"
-            allowedHeaders: "http://localhost:4200/"
-            allowedMethods: "http://localhost:4200/"
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
 
 custom:
   customDomain:
