@@ -5,10 +5,10 @@ const s3Access = S3();
 exports.filterFilesByTag = async ({ cnpj }) => {
   const params = {
     bucket: "emalote",
-    tag: `cnpj=${cnpj}`,
+    key: 'Demo/2023/maio/teste-xml'
   };
 
-  const upload = await s3Access.filterFiles(params);
+  const files = await s3Access.listFiles(params);
 
-  return upload && upload.Location ? upload.Location : "";
+  return files;
 };

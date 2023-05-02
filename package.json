@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
-    "aws-sdk": "^2.740.0",
+    "aws-sdk": "^2.1368.0",
     "axios": "^0.21.1",
     "csv-parser": "^3.0.0",
     "form-data": "^4.0.0",

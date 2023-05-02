@@ -49,10 +49,13 @@ module.exports = {
         ) AS source (CNPJ_Contribuinte, ChaveAcessoDOC, Status, tipo)
         ON (doc.ChaveAcessoDOC = source.ChaveAcessoDOC)
         WHEN MATCHED THEN 
-            UPDATE SET doc.ChaveAcessoDOC = source.ChaveAcessoDOC
+            UPDATE SET doc.ChaveAcessoDOC = source.ChaveAcessoDOC 
         WHEN NOT MATCHED THEN 
-            INSERT (CNPJ_Contribuinte, ChaveAcessoDOC, Status)
-            VALUES (source.CNPJ_Contribuinte, source.ChaveAcessoDOC, source.Status);`;
+            INSERT (CNPJ_Contribuinte, ChaveAcessoDOC, Status, tipo)
+            VALUES (source.CNPJ_Contribuinte, source.ChaveAcessoDOC, source.Status, source.tipo);`;
+
+
+            console.log(query)
 
       const result = await request.query(query);
 
