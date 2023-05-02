@@ -21,6 +21,7 @@ package:
     - "lib/phantomjs/phantomjs-mac"
 
 functions:
+  disableLogs: true
   base64ToFile:
     handler: src/routes.base64ToFile
     environment:
@@ -33,6 +34,7 @@ functions:
 
   downloadXML:
     handler: src/routes.downloadXML
+    disableLogs: true
     environment:
       client: lab
       service: downloadXML
