@@ -1,13 +1,13 @@
-const axios = require('axios');
+const axios = require("axios");
 
-const mssql  = require('../../../../common/mssql');
+const mssql = require("../../../../common/mssql");
 
-const { getCert } = require('./getCert');
+const { getCert } = require("./getCert");
 
 const addMissingParameterInUrl = (url) => {
-  if (!url.includes('&lp=')) {
-    url
-      += '&lp=L0l4L0hGSE1LMUtGeEJ5elpwTXNYeHRxOEx1RTA2SjhJMkludFZmZ0hvMFJITzBtaEdLK2YvbEFRYXFULzJJTlJyODhQNFVKakNDWTNhWm44NlpwNm9Ddkp2NTdiK3ZhQWFqSTdYQWJzN3M90';
+  if (!url.includes("&lp=")) {
+    url +=
+      "&lp=L0l4L0hGSE1LMUtGeEJ5elpwTXNYeHRxOEx1RTA2SjhJMkludFZmZ0hvMFJITzBtaEdLK2YvbEFRYXFULzJJTlJyODhQNFVKakNDWTNhWm44NlpwNm9Ddkp2NTdiK3ZhQWFqSTdYQWJzN3M90";
   }
 
   return url;
@@ -26,20 +26,18 @@ exports.download = async ({ url, key, cnpj }) => {
   try {
     const xml = await instance({
       url,
-      method: 'GET',
+      method: "GET",
       maxRedirects: 1,
-      responseType: 'text/xml',
+      responseType: "text/xml",
     });
 
-    if (!xml.data) {
-      throw new Error('Não foi possível gerar o XML');
+    console.log(xml.data);
+
+    if (!xml.data || xml.data?.includes("html")) {
+      throw new Error("Não foi possível gerar o XML");
     }
 
-    if (xml.data?.includes('html')) {
-      throw new Error('Não foi possível gerar o XML');
-    }
-
-    const buffer = Buffer.from(xml.data, 'utf-8');
+    const buffer = Buffer.from(xml.data, "utf-8");
 
     return buffer;
   } catch (error) {
