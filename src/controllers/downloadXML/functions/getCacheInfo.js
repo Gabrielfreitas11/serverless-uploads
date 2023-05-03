@@ -32,7 +32,7 @@ exports.getCacheInfo = async (cnpj, json) => {
     const { data } = await request(options);
 
     if (
-      DateTime.now().plus({ hours: -3 }).valueOf() > data?.createdAt &&
+      DateTime.now().plus({ hours: -1 }).valueOf() > data?.createdAt &&
       json.lp
     ) {
       await saveCacheInfo(cnpj, json);
