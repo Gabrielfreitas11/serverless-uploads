@@ -33,7 +33,7 @@ exports.sendFileToPath = async (fileBuffer, key) => {
 
     return data;
   } catch (error) {
-    console.log(error);
+    console.log(error?.message);
     mssql.update(1, key);
     throw new Error(error?.message);
   }

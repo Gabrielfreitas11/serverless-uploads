@@ -23,13 +23,14 @@ module.exports = async ({ body }) => {
       });
     }
 
-    const file = await sendFileToPath(fileBuffer, params.value.key);
+    await sendFileToPath(fileBuffer, params.value.key);
 
-    return HttpResponse.ok(file);
+    return HttpResponse.ok({
+      message: "Arquivo gerado com sucesso",
+    });
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     return HttpResponse.serverError({
-      error: error?.message,
       message: "Ocorreu um erro ao gerar o arquivo",
     });
   }
