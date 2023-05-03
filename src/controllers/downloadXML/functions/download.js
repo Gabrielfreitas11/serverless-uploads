@@ -12,6 +12,7 @@ const addMissingParameterInUrl = async (url, cnpj) => {
   const data = await getCacheInfo(cnpj, { lp: lp[1] });
 
   if (!data) {
+    await mssql.update(1, key);
     throw new Error("Não foi possível gerar o XML");
   }
 
@@ -30,9 +31,13 @@ exports.download = async ({ url, key, cnpj }) => {
     httpAgent,
   });
 
-  try {
-    url = await addMissingParameterInUrl(url, cnpj);
+  url = await addMissingParameterInUrl(url, cnpj);
 
+  if (!url) {
+    return null;
+  }
+
+  try {
     const xml = await instance({
       url,
       method: "GET",
