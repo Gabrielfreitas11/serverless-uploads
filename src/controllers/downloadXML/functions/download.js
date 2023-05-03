@@ -41,7 +41,8 @@ exports.download = async ({ url, key, cnpj }) => {
 
     return buffer;
   } catch (error) {
-    mssql.update(5, key);
+    await mssql.update(5, key);
     console.log(error);
+    throw error;
   }
 };

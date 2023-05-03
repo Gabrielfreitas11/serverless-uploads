@@ -29,12 +29,12 @@ exports.sendFileToPath = async (fileBuffer, key) => {
       throw new Error("Não foi possível salvar o arquivo na pasta");
     }
 
-    mssql.update(3, key);
+    await mssql.update(3, key);
 
     return data;
   } catch (error) {
     console.log(error?.message);
-    mssql.update(1, key);
+    await mssql.update(1, key);
     throw new Error(error?.message);
   }
 };
