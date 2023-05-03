@@ -4,10 +4,19 @@ const mssql = require("../../../../common/mssql");
 
 const { getCert } = require("./getCert");
 
-const addMissingParameterInUrl = (url) => {
+const { getCacheInfo } = require("./getCacheInfo");
+
+const addMissingParameterInUrl = async (url, cnpj) => {
+  const lp = url.split("&lp=");
+
+  const data = await getCacheInfo(cnpj, { lp: lp[1] });
+
+  if (!data) {
+    throw new Error("Não foi possível gerar o XML");
+  }
+
   if (!url.includes("&lp=")) {
-    url +=
-      "&lp=L0l4L0hGSE1LMUtGeEJ5elpwTXNYeHRxOEx1RTA2SjhJMkludFZmZ0hvMFJITzBtaEdLK2YvbEFRYXFULzJJTlJyODhQNFVKakNDWTNhWm44NlpwNm9Ddkp2NTdiK3ZhQWFqSTdYQWJzN3M90";
+    url += `&lp=${data.lp}`;
   }
 
   return url;
@@ -21,17 +30,15 @@ exports.download = async ({ url, key, cnpj }) => {
     httpAgent,
   });
 
-  url = addMissingParameterInUrl(url);
-
   try {
+    url = await addMissingParameterInUrl(url, cnpj);
+
     const xml = await instance({
       url,
       method: "GET",
       maxRedirects: 1,
       responseType: "text/xml",
     });
-
-    console.log(xml.data);
 
     if (!xml.data || xml.data?.includes("html")) {
       throw new Error("Não foi possível gerar o XML");

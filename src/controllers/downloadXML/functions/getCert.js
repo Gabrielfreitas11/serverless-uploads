@@ -5,6 +5,8 @@ const { decrypt } = require("../../../../common/cryptography");
 
 const mssql = require("../../../../common/mssql");
 
+const fs = require("fs");
+
 exports.getCert = async (cnpj, key) => {
   const certDB = await mssql.getCert(cnpj);
 
