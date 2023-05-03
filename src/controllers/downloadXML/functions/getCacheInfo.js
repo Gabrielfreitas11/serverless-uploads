@@ -40,8 +40,6 @@ exports.getCacheInfo = async (cnpj, json) => {
 
     return data;
   } catch (error) {
-    console.log(json.lp);
-
     if (!json.lp) {
       return null;
     }
