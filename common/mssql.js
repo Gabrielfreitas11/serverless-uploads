@@ -24,10 +24,12 @@ const connectDB = async () => {
 module.exports = {
   async getCert(cnpj) {
     try {
-      await connectDB();
+      const connect = await connectDB();
 
       const result =
         await sql.query`select top 1 Senha, RawData from IGCertificadoDigital where CNPJ_Contribuinte = ${cnpj}`;
+
+      await connect.close();
 
       return result?.recordsets?.flat() || [];
     } catch (error) {
@@ -38,7 +40,7 @@ module.exports = {
 
   async insert(data) {
     try {
-      await connectDB();
+      const connect = await connectDB();
 
       const request = new sql.Request();
 
@@ -54,10 +56,9 @@ module.exports = {
             INSERT (CNPJ_Contribuinte, ChaveAcessoDOC, Status, tipo)
             VALUES (source.CNPJ_Contribuinte, source.ChaveAcessoDOC, source.Status, source.tipo);`;
 
-
-            console.log(query)
-
       const result = await request.query(query);
+
+      await connect.close();
 
       return result?.recordsets?.flat() || [];
     } catch (error) {
@@ -67,13 +68,19 @@ module.exports = {
 
   async update(status, nfe) {
     try {
-      await connectDB();
+      const connect = await connectDB();
 
       if (status == 1) {
-        return sql.query`update IGXMLDownload set Status = ${status}, attempts = attempts + 1 where ChaveAcessoDOC = ${nfe}`;
+        await sql.query`update IGXMLDownload set Status = ${status}, attempts = attempts + 1 where ChaveAcessoDOC = ${nfe}`;
+
+        await connect.close();
+        return;
       }
 
-      return sql.query`update IGXMLDownload set Status = ${status} where ChaveAcessoDOC = ${nfe}`;
+      await sql.query`update IGXMLDownload set Status = ${status} where ChaveAcessoDOC = ${nfe}`;
+
+      await connect.close();
+      return;
     } catch (error) {
       console.log(error);
       return null;
