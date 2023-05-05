@@ -57,7 +57,7 @@ module.exports = {
     }
   },
 
-  async insert(data) {
+  async insert(data, CNPJ_Contribuinte) {
     try {
       const connect = await connectDB();
 
@@ -73,7 +73,9 @@ module.exports = {
             UPDATE SET doc.ChaveAcessoDOC = source.ChaveAcessoDOC 
         WHEN NOT MATCHED THEN 
             INSERT (CNPJ_Contribuinte, ChaveAcessoDOC, Status, tipo)
-            VALUES (source.CNPJ_Contribuinte, source.ChaveAcessoDOC, source.Status, source.tipo);`;
+            VALUES (source.CNPJ_Contribuinte, source.ChaveAcessoDOC, source.Status, source.tipo);
+            update IGXMLDownload set Status = 6 where CNPJ_Contribuinte = '${CNPJ_Contribuinte}' AND Status = 3
+            `;
 
       const result = await request.query(query);
 

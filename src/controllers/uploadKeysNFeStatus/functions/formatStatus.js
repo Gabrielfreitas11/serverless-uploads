@@ -34,7 +34,7 @@ exports.formatStatus = async (CNPJ_Gestor) => {
 
       const erros = infoContribuinte.filter(
         (el) => el.StatusDownload[0] == "4" || el.StatusDownload[0] == "5"
-      ).length;
+      );
 
       statusResult.push({
         CNPJ_Contribuinte: x,
@@ -45,10 +45,18 @@ exports.formatStatus = async (CNPJ_Gestor) => {
           .length,
         pendentes,
         sucessos,
-        erros,
+        erros: erros.length,
         percentPendentes: (pendentes / total) * 100,
         percentSucessos: (sucessos / total) * 100,
-        percentErros: (erros / total) * 100,
+        percentErros: (erros.length / total) * 100,
+        chavesComErro: erros.map((el) => ({
+          chave: el.ChaveAcessoDOC,
+          status: el.StatusDownload,
+          messagem:
+            el.StatusDownload == "5"
+              ? `CNPJ do certificado digital não tem autorização à essa chave, verificar se a chave pertence ao contribuinte ${x}`
+              : "Não foi localizado o certificado para esse contribuinte",
+        })),
       });
     });
 

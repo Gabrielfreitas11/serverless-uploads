@@ -16,7 +16,7 @@ exports.sendKeysToBase = async (keys, cnpj) => {
   try {
     const data = formatPayloadToDBValues(keys, cnpj);
 
-    const result = await mssql.insert(data);
+    const result = await mssql.insert(data, cnpj);
 
     return result;
   } catch (error) {
