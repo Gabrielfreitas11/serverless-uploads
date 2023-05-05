@@ -38,6 +38,25 @@ module.exports = {
     }
   },
 
+  async getStatusDownload(cnpj) {
+    try {
+      const connect = await connectDB();
+
+      const result =
+        await sql.query`SELECT *, xd.Status as StatusDownload FROM IGGestorContribuinte gc WITH (NOLOCK)
+        JOIN IGXMLDownload as xd WITH (NOLOCK) ON xd.CNPJ_Contribuinte = gc.CNPJ_Contribuinte
+        WHERE gc.Status = 'A'
+        AND gc.CNPJ_Gestor = ${cnpj}`;
+
+      await connect.close();
+
+      return result?.recordsets?.flat() || [];
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  },
+
   async insert(data) {
     try {
       const connect = await connectDB();
