@@ -63,7 +63,7 @@ exports.formatStatus = async ({ CNPJ_Gestor, CNPJ_Contribuinte }) => {
       });
     });
 
-    return statusResult.length === 0
+    return statusResult.length !== 0
       ? statusResult
       : {
           CNPJ_Contribuinte,

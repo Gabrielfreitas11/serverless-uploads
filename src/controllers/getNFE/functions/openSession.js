@@ -1,6 +1,6 @@
 const playwright = require("playwright-aws-lambda");
 
-const { mssql } = require("../../../../common/mssql");
+const mssql = require("../../../../common/mssql");
 
 const http = require("../../../../common/http");
 
@@ -24,6 +24,7 @@ exports.openSession = async (nfe, cnpj, type) => {
     if (error) {
       await mssql.update(1, nfe);
     }
+    
     await page.close();
     await context.close();
     await browser.close();
