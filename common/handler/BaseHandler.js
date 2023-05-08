@@ -87,7 +87,7 @@ class BaseHandler {
             ? "https://app.impostograma.com.br"
             : "http://localhost:4200",
         "Access-Control-Allow-Headers":
-          "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type",
+          "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type, cnpj_gestor",
         ...headers,
       },
     };
