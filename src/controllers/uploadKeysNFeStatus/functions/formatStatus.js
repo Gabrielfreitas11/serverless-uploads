@@ -63,7 +63,21 @@ exports.formatStatus = async ({ CNPJ_Gestor, CNPJ_Contribuinte }) => {
       });
     });
 
-    return statusResult;
+    return statusResult.length === 0
+      ? statusResult
+      : {
+          CNPJ_Contribuinte,
+          total: 0,
+          cte: 0,
+          nfe: 0,
+          pendentes: 0,
+          sucessos: 0,
+          erros: 0,
+          percentPendentes: 0,
+          percentSucessos: 0,
+          percentErros: 0,
+          chavesComErro: [],
+        };
   } catch (error) {
     console.log(error);
     return null;

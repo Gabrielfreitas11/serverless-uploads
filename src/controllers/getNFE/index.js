@@ -14,6 +14,8 @@ module.exports = async ({ body }) => {
       });
     }
 
+    const { nfe, cnpj, type } = params.value;
+
     await openSession(nfe, cnpj, type.toLowerCase());
 
     return HttpResponse.ok({

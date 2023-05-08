@@ -2,9 +2,7 @@ const playwright = require("playwright-aws-lambda");
 
 const { mssql } = require("../../../../common/mssql");
 
-const axios = require("axios");
-
-const { request } = require("../../../../common/http");
+const http = require("../../../../common/http");
 
 const { antiRecaptcha } = require("./antiRecaptcha");
 
@@ -141,7 +139,8 @@ exports.openSession = async (nfe, cnpj, type) => {
           },
         };
 
-        request(option)
+        http
+          .request(option)
           .then(() => console.log("Arquivo gerado com sucesso"))
           .catch((error) =>
             console.log("Problemas ao gerar o arquivo: ", error?.response?.data)
