@@ -44,13 +44,14 @@ module.exports = {
 
       const request = new sql.Request();
 
-      const query =
-        (await sql.query`SELECT *, xd.Status as StatusDownload FROM IGGestorContribuinte gc WITH (NOLOCK)
+      const query = `SELECT *, xd.Status as StatusDownload FROM IGGestorContribuinte gc WITH (NOLOCK)
         JOIN IGXMLDownload as xd WITH (NOLOCK) ON xd.CNPJ_Contribuinte = gc.CNPJ_Contribuinte
         WHERE gc.Status = 'A'
-        AND gc.CNPJ_Gestor = ${CNPJ_Gestor}`) + CNPJ_Contribuinte
-          ? `AND xd.CNPJ_Contribuinte = ${CNPJ_Contribuinte}`
-          : "";
+        AND gc.CNPJ_Gestor = ${CNPJ_Gestor} ${
+        CNPJ_Contribuinte
+          ? "AND xd.CNPJ_Contribuinte = " + `'${CNPJ_Contribuinte}'`
+          : ""
+      }`;
 
       const result = await request.query(query);
 

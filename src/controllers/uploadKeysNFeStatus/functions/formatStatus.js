@@ -1,11 +1,11 @@
 const mssql = require("../../../../common/mssql");
 
-exports.formatStatus = async (CNPJ_Gestor, CNPJ_Contribuinte) => {
+exports.formatStatus = async ({ CNPJ_Gestor, CNPJ_Contribuinte }) => {
   try {
-    const result = await mssql.getStatusDownload(CNPJ_Gestor, CNPJ_Contribuinte);
-
-
-    console.log(result)
+    const result = await mssql.getStatusDownload(
+      CNPJ_Gestor,
+      CNPJ_Contribuinte
+    );
 
     const statusResult = [];
     const contribuintes = [];

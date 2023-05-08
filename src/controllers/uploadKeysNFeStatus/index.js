@@ -17,13 +17,11 @@ module.exports = async ({ headers, queryStringParameters }) => {
       });
     }
 
-    let { CNPJ_Gestor } = params.value;
-
-    const result = await formatStatus(CNPJ_Gestor);
+    const result = await formatStatus(params.value);
 
     if (!result) {
       return HttpResponse.badRequest({
-        message: "Não foi possível realizar o upload das chaves",
+        message: "Não foi possível resgatar o status do upload",
       });
     }
 
@@ -32,7 +30,7 @@ module.exports = async ({ headers, queryStringParameters }) => {
     console.log(error);
     return HttpResponse.serverError({
       error: error?.message,
-      message: "Ocorreu um erro ao realizar o upload das chaves",
+      message: "Ocorreu um erro ao resgatar o status do upload",
     });
   }
 };
