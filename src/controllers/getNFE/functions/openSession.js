@@ -4,6 +4,8 @@ const { mssql } = require("../../../lib/mssql");
 
 const axios = require("axios");
 
+const { request } = require("../../../../common/http");
+
 const { antiRecaptcha } = require("./antiRecaptcha");
 
 const pages = {
@@ -139,7 +141,7 @@ exports.openSession = async (nfe, cnpj, type) => {
           },
         };
 
-        axios(option)
+        request(option)
           .then(() => console.log("Arquivo gerado com sucesso"))
           .catch((error) =>
             console.log("Problemas ao gerar o arquivo: ", error?.response?.data)
