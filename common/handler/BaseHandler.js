@@ -82,7 +82,10 @@ class BaseHandler {
       statusCode,
       body,
       headers: {
-        "Access-Control-Allow-Origin": "http://localhost:4200, https://app.impostograma.com.br",
+        "Access-Control-Allow-Origin":
+          process.env.stage == "prod"
+            ? "https://app.impostograma.com.br"
+            : "http://localhost:4200",
         "Access-Control-Allow-Headers":
           "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type",
         ...headers,
