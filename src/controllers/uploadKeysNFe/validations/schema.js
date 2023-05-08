@@ -3,7 +3,7 @@ const Joi = require("@hapi/joi");
 exports.schema = Joi.object({
   type: Joi.string().valid("file", "array", "pva").required(),
   formData: Joi.when("type", { is: "file", then: Joi.string().required() }),
-  fileName: Joi.when("type", { is: "pva", then: Joi.string().required() }),
+  fileUrl: Joi.when("type", { is: "pva", then: Joi.string().required() }),
   cnpj: Joi.string()
     .length(14)
     .custom((value, helpers) => {
