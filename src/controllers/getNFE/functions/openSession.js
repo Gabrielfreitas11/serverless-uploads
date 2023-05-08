@@ -1,6 +1,6 @@
 const playwright = require("playwright-aws-lambda");
 
-const { mssql } = require("../../../lib/mssql");
+const { mssql } = require("../../../../common/mssql");
 
 const axios = require("axios");
 
