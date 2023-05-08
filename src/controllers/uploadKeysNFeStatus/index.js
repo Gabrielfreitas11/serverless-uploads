@@ -4,10 +4,11 @@ const { isValidParams } = require("./validations/validator");
 
 const { formatStatus } = require("./functions/formatStatus");
 
-module.exports = async ({ headers }) => {
+module.exports = async ({ headers, queryStringParameters }) => {
   try {
     const params = isValidParams({
       CNPJ_Gestor: headers?.CNPJ_Gestor || headers?.cnpj_gestor,
+      ...queryStringParameters,
     });
 
     if (params.error) {

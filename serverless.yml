@@ -78,7 +78,7 @@ functions:
           cors:
             allowedOrigins: "http://localhost:4200"
             # allowedOrigins: "https://app.impostograma.com.br"
-            allowedHeaders: "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type"
+            allowedHeaders: "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj_gestor"
             allowedMethods: "*"
 
 custom:

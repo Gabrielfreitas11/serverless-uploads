@@ -1,7 +1,5 @@
 const playwright = require("playwright-aws-lambda");
 
-const { cache } = require("../../../lib/cache");
-
 const { mssql } = require("../../../lib/mssql");
 
 const axios = require("axios");
@@ -15,7 +13,6 @@ const pages = {
 
 exports.openSession = async (nfe, cnpj, type) => {
   await mssql.update(2, nfe);
-  await cache();
 
   const browser = await playwright.launchChromium();
 
@@ -24,8 +21,6 @@ exports.openSession = async (nfe, cnpj, type) => {
   const page = await context.newPage();
 
   const closeBrowser = async (error) => {
-    await cache(true);
-
     if (error) {
       await mssql.update(1, nfe);
     }
