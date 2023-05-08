@@ -51,6 +51,16 @@ functions:
           path: getFiles
           method: POST
 
+  getNFE:
+    handler: src/routes.getNFE
+    environment:
+      client: lab
+      service: getNFE
+    events:
+      - http:
+          path: getNFE
+          method: POST
+
   uploadKeysNFe:
     handler: src/routes.uploadKeysNFe
     environment:
@@ -74,7 +84,7 @@ functions:
     events:
       - http:
           path: uploadKeysNFeStatus
-          method: POST
+          method: GET
           cors:
             allowedOrigins: "http://localhost:4200"
             # allowedOrigins: "https://app.impostograma.com.br"
