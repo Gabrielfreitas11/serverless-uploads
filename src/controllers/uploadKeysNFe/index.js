@@ -4,6 +4,8 @@ const { isValidParams } = require("./validations/validator");
 
 const { getKeysFromBase64 } = require("./functions/getKeysFromBase64");
 
+const { getKeysFromPVA } = require("./functions/getKeysFromPVA");
+
 const { sendKeysToBase } = require("./functions/sendKeysToBase");
 
 module.exports = async ({ body, headers }) => {
@@ -20,10 +22,10 @@ module.exports = async ({ body, headers }) => {
       });
     }
 
-    let { type, keys, formData, cnpj, boundary } = params.value;
+    let { type, keys, formData, cnpj, fileUrl } = params.value;
 
     if (type == "file") {
-      keys = await getKeysFromBase64(formData, boundary);
+      keys = await getKeysFromBase64(formData);
 
       if (!keys) {
         return HttpResponse.badRequest({
@@ -31,6 +33,17 @@ module.exports = async ({ body, headers }) => {
         });
       }
     }
+
+    if (type == "pva") {
+      keys = await getKeysFromPVA(fileUrl);
+
+      if (!keys) {
+        return HttpResponse.badRequest({
+          message: "Não foi possível realizar o upload das chaves",
+        });
+      }
+    }
+
     const result = await sendKeysToBase(keys, cnpj);
 
     if (!result) {
