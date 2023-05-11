@@ -10,7 +10,7 @@ provider:
   # profile: default
   deploymentBucket:
     name: it-works-lab-serverless
-  memorySize: 128
+  memorySize: 512
   timeout: 30
   environment: ${file(./config/env.${opt:stage}.yml)}
 
