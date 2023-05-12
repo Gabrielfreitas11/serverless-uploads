@@ -71,10 +71,10 @@ functions:
           path: uploadKeysNFe
           method: POST
           cors:
-            allowedOrigins: "http://localhost:4200"
+            origin: "http://localhost:4200"
             # allowedOrigins: "https://app.impostograma.com.br"
-            allowedHeaders: "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type"
-            allowedMethods: "*"
+            headers: "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type"
+            methods: "POST"
 
   uploadKeysNFeStatus:
     handler: src/routes.uploadKeysNFeStatus
@@ -86,10 +86,10 @@ functions:
           path: uploadKeysNFeStatus
           method: GET
           cors:
-            allowedOrigins: "http://localhost:4200"
+            origin: "http://localhost:4200"
             # allowedOrigins: "https://app.impostograma.com.br"
-            allowedHeaders: "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type"
-            allowedMethods: "*"
+            headers: "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type"
+            methods: GET
 
 custom:
   customDomain:
