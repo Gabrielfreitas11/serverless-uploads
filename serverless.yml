@@ -1,4 +1,4 @@
-service: serverless-lab
+service: serverless-uploads
 
 provider:
   name: aws
@@ -94,7 +94,7 @@ functions:
 custom:
   customDomain:
     domainName: "services.impostograma.com.br"
-    basePath: "lab-${self:provider.stage}"
+    basePath: "uploads-${self:provider.stage}"
     stage: ${self:provider.stage}
   serverless-offline:
     host: 0.0.0.0
