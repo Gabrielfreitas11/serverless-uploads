@@ -10,13 +10,6 @@ on:
           - prod
         required: true
         default: dev
-      service:
-        type: choice
-        description: "environment"
-        options:
-          - lab
-        required: true
-        default: lab
 jobs:
   # Label of the container job
   container-job:

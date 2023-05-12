@@ -10,14 +10,6 @@ on:
           - prod
         required: true
         default: dev
-      service:
-        type: choice
-        description: "environment"
-        options:
-          - wpp-bot
-          - account
-        required: true
-        default: wpp-bot
       function:
         type: input
         description: "function"
