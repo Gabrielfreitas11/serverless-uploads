@@ -93,6 +93,7 @@ functions:
 
 custom:
   customDomain:
+    domainName: "services.impostograma.com.br"
     basePath: "lab-${self:provider.stage}"
     stage: ${self:provider.stage}
   serverless-offline:
