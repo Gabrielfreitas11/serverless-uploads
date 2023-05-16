@@ -71,8 +71,8 @@ functions:
           path: uploadKeysNFe
           method: POST
           cors:
-            origin: "http://localhost:4200"
-            # allowedOrigins: "https://app.impostograma.com.br"
+            origin: "http://localhost:4200, https://app.impostograma.com.br"
+            # origin: "https://app.impostograma.com.br"
             headers: "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type"
             methods: "POST"
 
@@ -86,8 +86,8 @@ functions:
           path: uploadKeysNFeStatus
           method: GET
           cors:
-            origin: "http://localhost:4200"
-            # allowedOrigins: "https://app.impostograma.com.br"
+            origin: "http://localhost:4200, https://app.impostograma.com.br"
+            # origin: "https://app.impostograma.com.br"
             headers: "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type"
             methods: GET
 
