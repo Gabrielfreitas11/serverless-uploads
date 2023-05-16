@@ -1,3 +1,8 @@
+const allowedOrigins = [
+  "http://localhost:4200",
+  "https://app.impostograma.com.br",
+];
+
 class BaseHandler {
   event = null;
 
@@ -7,6 +12,9 @@ class BaseHandler {
 
   async handle(event, context, method, ignoreBaseHandler) {
     this.setFunctionContext(event, context);
+
+
+    console.log(event)
 
     if (ignoreBaseHandler) return this[method](event, context);
 
@@ -82,8 +90,7 @@ class BaseHandler {
       statusCode,
       body,
       headers: {
-        "Access-Control-Allow-Origin":
-          "http://localhost:4200, https://app.impostograma.com.br",
+        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers":
           "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type, cnpj_gestor",
         ...headers,
