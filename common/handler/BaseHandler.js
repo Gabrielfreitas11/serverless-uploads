@@ -13,8 +13,6 @@ class BaseHandler {
   async handle(event, context, method, ignoreBaseHandler) {
     this.setFunctionContext(event, context);
 
-    console.log(event);
-
     const origin = event.headers?.origin || event.headers?.Origin;
 
     if (ignoreBaseHandler) return this[method](event, context);
