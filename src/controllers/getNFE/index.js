@@ -2,7 +2,7 @@ const { openSession } = require("./functions/openSession");
 
 const { isValidParams } = require("./validations/validator");
 
-const HttpResponse = require("../../../common/httpResponse");
+const { HttpResponse } = require("@impostograma/common");
 
 module.exports = async ({ body }) => {
   try {

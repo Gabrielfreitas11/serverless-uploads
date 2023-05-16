@@ -1,4 +1,4 @@
-const HttpResponse = require("../../../common/httpResponse");
+const { HttpResponse } = require("@impostograma/common");
 
 const { isValidParams } = require("./validations/validator");
 
