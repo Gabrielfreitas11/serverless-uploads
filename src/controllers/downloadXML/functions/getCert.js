@@ -11,7 +11,7 @@ exports.getCert = async (cnpj, key) => {
   const certDB = await mssql.getCert(cnpj);
 
   if (!certDB || certDB?.length === 0) {
-    await mssql.update(4, key);
+    await mssql.update(4, key, cnpj);
     throw new Error(
       "Não foi localizado nunenhum certificado com esse cnpj: ",
       cnpj

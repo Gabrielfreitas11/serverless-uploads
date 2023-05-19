@@ -27,7 +27,7 @@ module.exports = {
       const connect = await connectDB();
 
       const result =
-        await sql.query`select top 1 Senha, RawData from IGCertificadoDigital where CNPJ_Contribuinte = ${cnpj}`;
+        await sql.query`select top 1 Senha, RawData from IGCertificadoDigital where CNPJ_Contribuinte = '${cnpj}'`;
 
       await connect.close();
 
@@ -94,12 +94,19 @@ module.exports = {
     }
   },
 
-  async update(status, nfe) {
+  async update(status, nfe, CNPJ_Contribuinte) {
     try {
       const connect = await connectDB();
 
       if (status == 1) {
         await sql.query`update IGXMLDownload set Status = ${status}, attempts = attempts + 1 where ChaveAcessoDOC = ${nfe}`;
+
+        await connect.close();
+        return;
+      }
+
+      if (status == 4) {
+        await sql.query`update IGXMLDownload set Status = ${status}, attempts = attempts + 1 where CNPJ_Contribuinte = '${CNPJ_Contribuinte}'`;
 
         await connect.close();
         return;

@@ -32,7 +32,7 @@ functions:
 
   downloadXML:
     handler: src/routes.downloadXML
-    # disableLogs: true
+    disableLogs: true
     environment:
       client: lab
       service: downloadXML
