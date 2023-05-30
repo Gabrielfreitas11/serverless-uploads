@@ -7,5 +7,7 @@ config/env.dev.yml
 config/env.prod.yml
 config/aws/*
 
+config/config.json
+
 # Serverless directories
 .serverless

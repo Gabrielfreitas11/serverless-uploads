@@ -1,4 +1,4 @@
-const { request } = require("../../../../common/http");
+const { Http } = require("@impostograma/common");
 
 const filterkeys = (file) => {
   //nfe = C100
@@ -31,7 +31,7 @@ exports.getKeysFromPVA = async (fileUrl) => {
       },
     };
 
-    const file = await request(options);
+    const file = await Http(options);
 
     const keys = filterkeys(file.data.split("\r\n"));
 

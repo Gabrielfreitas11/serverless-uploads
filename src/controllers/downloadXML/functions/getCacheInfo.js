@@ -4,7 +4,7 @@ const s3Access = s3();
 
 const { DateTime } = require("luxon");
 
-const { request } = require("../../../../common/http");
+const { Http } = require("@impostograma/common");
 
 const saveCacheInfo = async (cnpj, data) => {
   const caption = `${cnpj}.text`;
@@ -29,7 +29,7 @@ exports.getCacheInfo = async (cnpj, json) => {
       method: "GET",
     };
 
-    const { data } = await request(options);
+    const { data } = await Http(options);
 
     if (
       DateTime.now().plus({ hours: -1 }).valueOf() > data?.createdAt &&

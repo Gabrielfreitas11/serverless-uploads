@@ -1,0 +1,1 @@
+exports.errorProcess = async (info) => {};

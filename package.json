@@ -13,9 +13,9 @@
   "author": "Gabriel Freitas",
   "license": "ISC",
   "dependencies": {
-    "@antiadmin/anticaptchaofficial": "^1.0.34",
     "@hapi/joi": "^17.1.1",
-    "@impostograma/common": "^1.0.3",
+    "@impostograma/common": "^1.0.69",
+    "adm-zip": "^0.5.10",
     "aws-sdk": "^2.1368.0",
     "axios": "^0.21.1",
     "csv-parser": "^3.0.0",
@@ -24,8 +24,7 @@
     "luxon": "^3.3.0",
     "mssql": "^9.1.1",
     "pem": "^1.14.7",
-    "playwright-aws-lambda": "^0.10.0",
-    "playwright-core": "^1.33.0",
+    "serverless-plugin-ifelse": "^1.0.7",
     "tough-cookie": "^4.1.2"
   },
   "devDependencies": {

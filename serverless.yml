@@ -20,21 +20,11 @@ package:
     - "lib/phantomjs/phantomjs-mac"
 
 functions:
-  base64ToFile:
-    handler: src/routes.base64ToFile
-    environment:
-      client: lab
-      service: base64ToFile
-    events:
-      - http:
-          path: base64ToFile
-          method: POST
-
   downloadXML:
-    handler: src/routes.downloadXML
     disableLogs: true
+    handler: src/routes.downloadXML
     environment:
-      client: lab
+      client: uploads
       service: downloadXML
     events:
       - http:
@@ -42,9 +32,10 @@ functions:
           method: POST
 
   getFiles:
+    # disableLogs: true
     handler: src/routes.getFiles
     environment:
-      client: lab
+      client: uploads
       service: getFiles
     events:
       - http:
@@ -54,7 +45,7 @@ functions:
   getNFE:
     handler: src/routes.getNFE
     environment:
-      client: lab
+      client: uploads
       service: getNFE
     events:
       - http:
@@ -64,7 +55,7 @@ functions:
   uploadKeysNFe:
     handler: src/routes.uploadKeysNFe
     environment:
-      client: lab
+      client: uploads
       service: uploadKeysNFe
     events:
       - http:
@@ -79,7 +70,7 @@ functions:
   uploadKeysNFeStatus:
     handler: src/routes.uploadKeysNFeStatus
     environment:
-      client: lab
+      client: uploads
       service: uploadKeysNFeStatus
     events:
       - http:
@@ -91,15 +82,45 @@ functions:
             headers: "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token, cnpj, type"
             methods: GET
 
+  uploadsFiles:
+    # disableLogs: true
+    handler: src/routes.uploadsFiles
+    environment:
+      client: uploads
+      service: uploadsFiles
+    events:
+      - http:
+          path: uploadsFiles
+          method: POST
+
+  workerUploadsFiles:
+    # disableLogs: true
+    handler: src/routes.workerUploadsFiles
+    environment:
+      client: uploads
+      service: workerUploadsFiles
+    events:
+      - http:
+          path: workerUploadsFiles
+          method: POST
+
 custom:
+  currentStage: ${self:provider.stage}
+  serverlessIfElse:
+    - If: '"${self:custom.currentStage}" == "dev"'
+      Exclude:
+        - functions.uploadsFiles
+        - functions.workerUploadsFiles
+
   customDomain:
     domainName: "services.impostograma.com.br"
     basePath: "uploads-${self:provider.stage}"
     stage: ${self:provider.stage}
   serverless-offline:
     host: 0.0.0.0
-    port: 3001
+    port: 3000
 
 plugins:
   - serverless-offline
   - serverless-domain-manager
+  - serverless-plugin-ifelse

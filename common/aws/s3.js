@@ -1,18 +1,21 @@
 const aws = require("aws-sdk");
 
 const methods = {
-  async getContentFile(bucketName, keyName) {
+  async getContentFile(fileDetails) {
+
     const params = {
-      Bucket: bucketName,
-      Key: keyName,
+      Bucket: fileDetails.bucket,
+      Key: fileDetails.key,
     };
+
+    console.log(params)
 
     const s3sdk = new aws.S3();
 
     return s3sdk.getObject(params).promise();
   },
 
-  async sendFile(fileDetails, expires, acl = "public-read") {
+  async sendFile(fileDetails, expires, acl) {
     const params = {
       Bucket: fileDetails.bucket,
       Key: fileDetails.caption,
